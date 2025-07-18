@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meal Card</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .barcode-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <script>
+        function generateBarcode(value) {
+            let formData = new FormData();
+            formData.append('data', value);
+
+            fetch('http://localhost:5000/generate_barcode', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.blob())
+              .then(blob => {
+                let imageUrl = URL.createObjectURL(blob);
+                document.getElementById('barcode').src = imageUrl;
+            });
+        }
+
+        window.onload = function() {
+            let barcodeData = "{{ barcode_data }}";  // Get barcode_data from Flask
+            generateBarcode(barcodeData);  // Automatically generate barcode on page load
+        };
+    </script>
+</head>
+<body>
+    <div class="card-container">
+        <h2>Meal Card</h2>
+        <div>
+            <p><strong>Student ID:</strong> {{ student_id }}</p>
+            <p><strong>Meal Type:</strong> {{ meal_type }}</p>
+        </div>
+        <div class="barcode-container">
+            <img id="barcode" alt="Meal Barcode"/>
+        </div>
+    </div>
+</body>
+</html>

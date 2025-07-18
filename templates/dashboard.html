@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        form {
+            margin: 15px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Meal Counting App!</h1>
+    <h3>Select your Role</h3>
+    <form action="/login">
+        <button type="submit">Student</button>
+    </form>
+    <button id="installButton">📲 Install App</button>
+
+    <form action="/mess_login">
+        <button type="submit">Mess</button>
+    </form>
+
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <!-- Internal CSS -->
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .profile-container {
+            background: white;
+            padding: 25px;
+            width: 380px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 22px;
+        }
+
+        /* Form Label */
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
+        }
+
+        input[readonly] {
+            background: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .save-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #218838;
+        }
+
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #a71d2a;
+        }
+
+        .logout-btn {
+            background: #ff4500;
+            color: white;
+        }
+
+        .logout-btn:hover {
+            background: #c23616;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>Edit Profile</h2>
+
+        <form action="/update_profile" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ student['username'] }}" required readonly>
+
+            <label for="student_id">Student ID</label>
+            <input type="text" id="student_id" name="student_id" value="{{ student['student_id'] }}" readonly>
+
+            <label for="password">New Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password (optional)">
+
+            <div class="button-group">
+                <button type="submit" class="btn save-btn">Save Changes</button>
+                <a href="/student_dashboard" style="width: 100%;">
+                    <button type="button" class="btn cancel-btn">Cancel</button>
+                </a>
+            </div>
+        </form>
+
+        <!-- Logout Button -->
+        <form action="/logout" method="GET">
+            <button type="submit" class="btn logout-btn">Logout</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
