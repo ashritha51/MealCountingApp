@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h2>🍽 Meal Dashboard</h2>
+
+    <h3>Today's Meal Type Count</h3>
+    <img src="{{ url_for('static', filename='charts/meal_pie.png') }}" alt="Meal Pie Chart" width="400">
+
+    <h3>📅 Weekly Meal Trends</h3>
+    <img src="{{ url_for('static', filename='charts/weekly_trend.png') }}" alt="Weekly Bar Chart" width="600">
+
+
+    <h3>⚠️ Top 5 Students Missing Meals</h3>
+    <ul>
+        {% for s in top_missers %}
+            <li>{{ s.student_id }} — {{ s.missed }} missed</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Menu</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CVR College Mess Menu</h1>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Evening Snacks</th>
+            <th>Dinner</th>
+        </tr>
+        {% for day, meals in menu.items() %}
+        <tr>
+            <td><b>{{ day }}</b></td>
+            <td>{{ meals.Breakfast }}</td>
+            <td>{{ meals.Lunch }}</td>
+            <td>{{ meals['Evening Snacks'] }}</td>
+            <td>{{ meals.Dinner }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

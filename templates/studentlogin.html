@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Login</title>
+
+    <style>
+      /* General Page Styling */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Container */
+      .login-container {
+        background: white;
+        padding: 30px;
+        width: 350px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        text-align: center;
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Header */
+      h1 {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 24px;
+      }
+
+      /* Form Label */
+      label {
+        display: block;
+        text-align: left;
+        margin: 10px 0 5px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      /* Input Fields */
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: #2575fc;
+        outline: none;
+        box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
+      }
+
+      .forgot {
+        display: block;
+        text-align: right;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #2575fc;
+        text-decoration: none;
+      }
+
+      .forgot:hover {
+        text-decoration: underline;
+      }
+
+      /* Login Button */
+      .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+        background: #28a745;
+        color: white;
+      }
+
+      .btn:hover {
+        background: #218838;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <h1>Student Login</h1>
+      <form action="{{ url_for('login') }}" method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" required />
+
+        <label>Password:</label>
+        <input type="password" name="password" required />
+        <a class="forgot" href="/forgot-password">Forgot Password?</a>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+  </body>
+</html>

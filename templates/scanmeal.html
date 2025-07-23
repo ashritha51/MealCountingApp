@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Meal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            margin: auto;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 90%;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mark Meal</h1>
+        <form method="POST">
+            <label for="barcode">Enter Barcode:</label><br>
+            <input type="text" id="barcode" name="barcode" required><br>
+            <input type="submit" class="btn" value="Mark as Eaten">
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="message" style="color: {% if category == 'success' %}green{% else %}red{% endif %};">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Table to Display Marked Meals -->
+        {% if eaten_meals %}
+        <h2>Marked as Eaten</h2>
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Meal Type</th>
+            </tr>
+            {% for meal in eaten_meals %}
+            <tr>
+                <td>{{ meal.student_id }}</td>
+                <td>{{ meal.meal_type }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <!-- Internal CSS -->
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+
+        /* Header */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+        }
+
+        /* Profile Edit Button */
+        .profile-container {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .profile-btn {
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #007bff;
+            transition: 0.3s;
+        }
+
+        .profile-btn:hover {
+            background: #0056b3;
+            color: white;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #333;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            transition: 0.3s ease;
+            border-radius: 6px;
+        }
+
+        nav ul li a:hover {
+            background: #007bff;
+            transform: scale(1.1);
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 12px;
+            background: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .dashboard-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        Student Dashboard
+        <div class="profile-container">
+            <a href="/edit_profile" class="profile-btn">Edit Profile</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/get_menu">View Meal Menu</a></li>
+            <li><a href="/meal_selection">Meal Selection</a></li>
+            <li><a href="/meal_card">Meal Card</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <h2>Welcome, {{ student }}</h2>
+        <p>Student ID: <strong>{{ student_id }}</strong></p>
+        <p>Select your meal and generate your meal card.</p>
+    </div>
+
+    <footer>
+        &copy; 2025 Meal Management System
+    </footer>
+
+</body>
+</html>

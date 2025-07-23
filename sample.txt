@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .qr-code, .barcode {
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .not-selected {
+            color: red;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        #successMessage {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="mealCard">
+        <h1>Meal Card</h1>
+        <p><strong>Student:</strong> {{ student }}</p>
+        <p><strong>Meal Type:</strong> {{ meal_type }}</p>
+        
+        {% if meal_type != "Not Selected" %}
+            <div class="image-container">
+                <img id="barcode" class="barcode" src="{{ url_for('generate_barcode', data=student_id ~ meal_type) }}" alt="Meal Barcode" width="250">
+                <p id="barcode_value" style="display: none;">{{ student_id }}{{ meal_type }}</p>
+            </div>
+        {% else %}
+            <p class="not-selected">Meal Not Selected</p>
+        {% endif %}
+        
+        <br>
+        <a class="btn" href="{{ url_for('student_dashboard') }}">Back to Dashboard</a>
+    </div>
+
+    <div id="successMessage">
+        <h2>Enjoy your meal! 🍽️</h2>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let studentId = "{{ student_id }}";
+            let mealType = "{{ meal_type }}";
+    
+            if (mealType !== "Not Selected") {
+                let barcodeUrl = `http://localhost:5000/generate_barcode?data=${studentId}${mealType}`;
+                document.getElementById("barcode").src = barcodeUrl;
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meal Card</title>
+    <script>
+        function generateBarcode(value) {
+            let formData = new FormData();
+            formData.append('data', value);
+            fetch('http://localhost:5000/generate_barcode', {
+                method: 'POST',
+                body: formData
+            }).then((res) => {
+                res.body.getReader().read().then((img) => {
+                    let imageByteArray = img.value;
+                    let stringValue = String.fromCharCode(...imageByteArray);
+                    let encodedValue = btoa(stringValue);
+                    document.getElementById('barcode').src = `data:image/png;base64,${encodedValue}`;
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <h2>Meal Card</h2>
+    <div>
+        <p><strong>Student ID:</strong> {{ student_id }}</p>
+        <p><strong>Meal Type:</strong> {{ meal_type }}</p>
+    </div>
+    {% comment %} <img id="barcode" src="{{ barcode_url }}" alt="Meal Barcode"/> {% endcomment %}
+
+    <img id="barcode"/>
+</body>
+</html>
